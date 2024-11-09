@@ -35,7 +35,7 @@ lightbox.on('closed.simplelightbox', function() {
 });
 
 const renderGallery = (gallery, images) => {
-  gallery.innerHTML += images.map(image => getGalleryItem(image)).join('');
+  gallery.insertAdjacentHTML('beforeend', images.map(image => getGalleryItem(image)).join(''));
   lightbox.refresh();
 };
 

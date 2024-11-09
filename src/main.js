@@ -1,5 +1,5 @@
 import { errorMessage, successMessage } from './js/common.js';
-import { fetchImages } from './js/pixabay-api.js';
+import { fetchFirstPage, fetchNextPage } from './js/pixabay-api.js';
 import { renderGallery } from './js/render-functions.js';
 
 const searchFieldSelector = document.querySelector('.search-field');
@@ -9,7 +9,6 @@ const loadFormSelector = document.querySelector('#load-form');
 const bottomLoader = document.querySelector('#bottom-loader');
 const noResultsSelector = document.querySelector('#no-results');
 
-let page = 1;
 let lastQuery = '';
 
 document.querySelector('#search-form').addEventListener('submit', async (event) => {
@@ -26,7 +25,7 @@ document.querySelector('#search-form').addEventListener('submit', async (event) 
   let noMoreImages = false;
 
   try {
-    const data = await fetchImages(query, page);
+    const data = await fetchFirstPage(query);
     noMoreImages = data.noMoreImages;
     renderGallery(gallery, data.images);
     loadFormSelector.classList.remove('hidden');
@@ -55,7 +54,6 @@ loadFormSelector.addEventListener('submit', async (event) => {
     return;
   }
 
-  page++;
   lastQuery = query;
 
   bottomLoader.classList.remove('hidden');
@@ -63,7 +61,7 @@ loadFormSelector.addEventListener('submit', async (event) => {
   let noMoreImages = false;
 
   try {
-    const data = await fetchImages(query, page);
+    const data = await fetchNextPage(query);
     noMoreImages = data.noMoreImages;
     renderGallery(gallery, data.images);
     smoothScroll();

@@ -21,7 +21,7 @@ body {
 }
 
 .load-more {
-  margin-top: 20px;
+  margin-top: 60px;
 }
 
 .form button {
@@ -55,7 +55,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 0;
+  margin: 60px 0;
 }
 
 .loader {
@@ -117,12 +117,13 @@ body {
   width: 100%;
   border: 1px solid #666161;
   box-sizing: border-box;
+  height: 300px;
 }
 
 .gallery-image {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   cursor: zoom-in;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);

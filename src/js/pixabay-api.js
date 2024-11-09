@@ -27,7 +27,17 @@ async function processData(data) {
   })));
 }
 
-const fetchImages = async (query, page) => {
+const fetchFirstPage = async (query) => {
+  return await fetchPage(query, 1);
+};
+
+const fetchNextPage = async (query) => {
+  const nextPage = Number.parseInt(requestParams.get("page")) + 1;
+
+  return await fetchPage(query, nextPage);
+};
+
+async function fetchPage(query, page) {
   requestParams.set('q', query);
   requestParams.set('page', page);
 
@@ -38,6 +48,6 @@ const fetchImages = async (query, page) => {
     images: images,
     noMoreImages: response.data.totalHits <= page * perPage,
   };
-};
+}
 
-export { fetchImages };
+export { fetchFirstPage, fetchNextPage };
